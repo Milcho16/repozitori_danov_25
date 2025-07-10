@@ -24,18 +24,12 @@ export default function SignUp() {
   const [step, setStep] = React.useState(1);
 
   const formik = useFormik({
-    initialValues: { email: "", },
+    initialValues: { email: "",name:"" },
     validationSchema,
     onSubmit: (values) => {
       console.log("Финални данни:", values);
     },
   });
-
-  const handleNextStep = () => {
-    if (step === 1) {
-      setStep(2);
-    }
-  };
 
   return (
     <>
@@ -85,7 +79,20 @@ export default function SignUp() {
                   />
                 </FormControl>
 
-                
+                <FormControl fullWidth sx={{ mb: 3 }}>
+                  <FormLabel>Имe</FormLabel>
+                  <TextField
+                    id="name"
+                    name="name"
+                    placeholder="hristiana"
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.name && Boolean(formik.errors.name)}
+                    helperText={formik.touched.name && formik.errors.name}
+                  />
+                </FormControl>
+
 
                 <Button
                   fullWidth
