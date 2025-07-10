@@ -17,6 +17,11 @@ import * as yup from "yup";
 const validationSchema = yup.object({
   
   email: yup.string().email("Невалиден имейл").required("Имейл е задължителен"),
+  password: yup
+  .string("Enter your password")
+  .min(8, 'Password is too short - should be 8 chars minimum.')
+  .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.')
+  .required("Password is required")
   
 });
 
@@ -82,6 +87,19 @@ export default function SignUp() {
                     onBlur={formik.handleBlur}
                     error={formik.touched.email && Boolean(formik.errors.email)}
                     helperText={formik.touched.email && formik.errors.email}
+                  />
+                </FormControl>
+                <FormControl fullWidth sx={{ mb: 3 }}>
+                  <FormLabel>Парола</FormLabel>
+                  <TextField
+                    id="password"
+                    name="password"
+                    placeholder="you@example.com"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.password && Boolean(formik.errors.password)}
+                    helperText={formik.touched.password && formik.errors.password}
                   />
                 </FormControl>
 
